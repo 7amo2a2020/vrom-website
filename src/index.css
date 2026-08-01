@@ -1,0 +1,143 @@
+@import 'tailwindcss';
+
+/*
+  VROM design tokens — the palette the Flutter app and the admin panel already
+  use (CLAUDE.md §8), so the three surfaces read as one product. Declared as
+  Tailwind v4 theme variables, which generates `bg-primary` / `text-text-2` /
+  `border-hairline` and friends.
+*/
+@theme {
+  --color-primary: #3b82c4;
+  --color-primary-light: #ebf3fb;
+  --color-cover: #1f5ea3;
+
+  --color-text-1: #0d1b2e;
+  --color-text-2: #4a6480;
+  /* Decoration only — this fails AA against the page background. */
+  --color-text-3: #8aadc8;
+
+  --color-border-soft: #b0cde8;
+  --color-hairline: #e3edf8;
+  --color-bg: #f4f8fd;
+  --color-bg-alt: #ecf3fb;
+
+  --color-danger: #c42b2b;
+  --color-danger-bg: #fcecec;
+  --color-success: #22913a;
+  --color-success-bg: #e8f7ec;
+  --color-warn: #c47a1e;
+  --color-warn-bg: #fef3e2;
+
+  --font-sans: 'Cairo', system-ui, sans-serif;
+
+  /* The one easing the whole site moves on. */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+  Cairo, self-hosted and subset to Arabic + Latin. Only the four weights the
+  site actually renders: 400 body, 600 labels, 700 card titles, 800 headings.
+  A render-blocking Google Fonts stylesheet plus a second origin cost more than
+  the fonts do on an Egyptian 3G connection.
+*/
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/cairo-arabic.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0898-08E1,
+    U+08E3-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200E, U+2010-2011, U+204F,
+    U+2E41, U+FBB2-FBC2;
+}
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/cairo-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-1);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    /* A stray wide child must never scroll the page sideways. */
+    overflow-x: hidden;
+  }
+  /* Arabic needs the taller line or the kasra gets clipped. */
+  p,
+  li {
+    line-height: 1.75;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+}
+
+@layer utilities {
+  /*
+    Latin runs and digits inside Arabic text. `<bdi dir="ltr">` fixes the
+    ordering; this fixes the alignment of tabular figures next to it.
+  */
+  .nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /*
+    The faint engineering grid behind the hero and the compatibility section —
+    "measured to fit". 3.5% is deliberately at the edge of visible: the white
+    cards sit on top, so contrast is untouched. Never page-wide.
+  */
+  .blueprint {
+    background-image:
+      linear-gradient(rgba(59, 130, 196, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 196, 0.035) 1px, transparent 1px);
+    background-size:
+      28px 28px,
+      28px 28px;
+  }
+}
+
+/*
+  Reveal-on-scroll. The hidden state is applied by JS (`useReveal`), so with no
+  JS — or with reduced motion — everything is simply visible. Content is never
+  gated behind an animation.
+*/
+[data-reveal-hidden='true'] {
+  opacity: 0;
+  transform: translateY(26px);
+}
+[data-reveal] {
+  transition:
+    opacity 550ms var(--ease-out-quint),
+    transform 550ms var(--ease-out-quint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal-hidden='true'] {
+    opacity: 1;
+    transform: none;
+  }
+}
