@@ -4,7 +4,7 @@ import { Card, Eyebrow, Ltr, Section, SectionHeading, buttonStyles } from './ui'
 import {
   categories,
   conditions,
-  customerSteps,
+  directSteps,
   faqs,
   merchantSteps,
   payments,
@@ -22,8 +22,8 @@ export function Problem() {
       <SectionHeading
         eyebrow="الوجع"
         eyebrowTone="danger"
-        title="شراء قطعة غيار في مصر تعب"
-        lede="مش مشكلة سعر بس — المشكلة إنك مش متأكد إن اللي بتشتريه هيركب."
+        title="عايز قطعة… يعني هتنزل"
+        lede="وإنت أصلًا عارف تاجرك وواثق فيه — المشكلة في المشوار مش في الثقة."
       />
       <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-5">
         {problems.map((p, i) => (
@@ -136,18 +136,23 @@ function PhoneShot({ src, alt, caption }: { src: string; alt: string; caption: s
   )
 }
 
-export function HowCustomer() {
+export function DirectMerchant() {
   return (
-    <Section id="how-customer" alt>
+    <Section id="direct" alt>
       <div className="flex flex-wrap items-start gap-14">
         <div className="flex min-w-[300px] flex-1 basis-[480px] flex-col gap-8">
-          <SectionHeading eyebrow="للعميل" eyebrowTone="plain" title="إزاي بتجيب قطعتك" />
-          <Steps steps={customerSteps} railBorder="#DCE9F7" />
+          <SectionHeading
+            eyebrow="تاجرك معاك"
+            eyebrowTone="plain"
+            title="اطلب من نفس التاجر — من غير ما تنزل"
+            lede="إنت عارفه وواثق فيه وبتتعامل معاه في العادي. كل اللي اتغيّر إنك مش محتاج تنزل."
+          />
+          <Steps steps={directSteps} railBorder="#DCE9F7" />
         </div>
         <PhoneShot
           src={`${BASE}screens/new-request.png`}
           alt="شاشة طلب جديد في تطبيق VROM: اختيار العربية والقطع المطلوبة وإرسال الطلب للتجار"
-          caption="شاشة العميل — طلب جديد"
+          caption="ابعت لتاجرك أو لكل التجار — إنت تختار"
         />
       </div>
     </Section>
@@ -166,8 +171,8 @@ export function HowMerchant() {
         <div className="flex min-w-[300px] flex-1 basis-[480px] flex-col gap-8">
           <SectionHeading
             eyebrow="للتاجر"
-            title="الزبون بيدوّر عليك أصلًا"
-            lede="مش محتاج تعمل موقع ولا تعرف إعلانات — الطلبات بتيجيلك في تخصصك إنت."
+            title="زباينك يفضلوا معاك"
+            lede="اللي بيشتري منك بيفضل يشتري منك — بس من التطبيق. وفوقيهم طلبات جديدة في تخصصك."
           />
 
           {/* The money model up front: it is the merchant's first question. */}

@@ -11,18 +11,47 @@ and the brief is `website/design.md`. When the code and this file disagree with 
 the design wins — but nothing here may be changed casually, because each value below was
 decided and reviewed.
 
+## The story the site tells
+
+Decided 1 Aug 2026, and it is **not** the compatibility engine. Do not drift back to it.
+
+**The pain is the trip, not the trust.** People already have a spare-parts merchant they
+know and buy from. What they don't want is to shut the shop, drive to the market and stand
+in the crowd for a part they know who sells.
+
+So the site tells it in two paths:
+
+1. **Your own merchant, delivered.** Pick the shop you already deal with, send him the
+   request, he answers with his price, and the part comes to your door. Nothing about the
+   relationship changes except the journey. This is the lead.
+2. **Nobody you know has it.** Post the request once, it reaches the merchants who deal in
+   your car's brand, and the offers come back to you — so you choose on price or on rating
+   sitting down, instead of walking the market asking.
+
+Both are real product features: `isDirect` / `isDirected` on a request is the first path,
+the open RFQ is the second.
+
+**Compatibility is now a trust point, not the headline.** "القطعة بتركب" sits in the trust
+section with verified merchants and managed shipping. It is true and it matters — it is just
+not what gets someone to open the app.
+
+---
+
 ## Non-negotiables
 
 1. **Arabic only, full RTL.** No English version, no language switch. `<html dir="rtl" lang="ar">`.
 2. **Light theme.** Page background `#F4F8FD`. There is no dark mode.
 3. **Cairo**, self-hosted, Arabic subset, **weights 400/600/700/800 only** (300 and 500 are
    used nowhere — do not add them back).
-4. **The app screenshots inside phone frames stay dark.** That contrast is deliberate: a dark
+4. **The logo is the real artwork**, shipped as `logo-blue.png` and `logo-white.png` (one
+   per surface — a CSS filter cannot turn white into brand blue). The wordmark beside it is
+   live text, not part of the image. Never mirrored.
+5. **The app screenshots inside phone frames stay dark.** That contrast is deliberate: a dark
    phone on a light page. Never lighten or recolor them.
-5. **Never invent content.** No made-up stats ("+500 merchants"), no fake testimonials, no
-   partner/press logos. The only number on the page is the compatibility demo's `47`, and it
-   carries a «عيّنة» badge and «مثال توضيحي» beside it.
-6. **Never imply money-back or escrow.** VROM manages shipping and takes commission on
+6. **Never invent content.** No made-up stats ("+500 merchants"), no fake testimonials, no
+   partner/press logos. The offers scene shows sample prices and ratings under a «عيّنة»
+   badge, with generic shop names — never a real business.
+7. **Never imply money-back or escrow.** VROM manages shipping and takes commission on
    delivery; there is **no held-funds guarantee**. Reassurance copy stays on what is true:
    الدفع عند الاستلام · الشحن بنديره ونتابعه · تجار موثّقين · تقييم ونظام نزاعات.
 
@@ -75,10 +104,10 @@ Everything is **`transform` and `opacity` only**. No animation library: CSS tran
 | Reveal on scroll | IO, 14% + `-8%` margin | 550ms | `cubic-bezier(.22,1,.36,1)` |
 | …stagger between items | | 90ms | |
 | Mockup screen swap | auto loop, stops on tap | 2600ms hold / 600ms move | `cubic-bezier(.4,0,.2,1)` |
-| Compat: brand/model/year | scroll-scrub at .08/.20/.32 | 350ms | `cubic-bezier(.22,1,.36,1)` |
-| Compat: car progress bar | scroll-scrub .04→.40 | live | `linear` |
-| Compat: parts light up | scroll-scrub .46→.80, staggered | 400ms | `cubic-bezier(.22,1,.36,1)` |
-| Compat: payoff capsule | scroll-scrub .78→.92 | 500ms | `cubic-bezier(.22,1,.36,1)` |
+| Offers: request leaves | scroll-scrub .06→.26 | live | `cubic-bezier(.22,1,.36,1)` |
+| Offers: merchants light up | scroll-scrub .24→.50, staggered | 400ms | `linear` |
+| Offers: offer cards return | scroll-scrub .48→.82, staggered | 450ms | `cubic-bezier(.22,1,.36,1)` |
+| Offers: payoff capsule | scroll-scrub .80→.94 | 500ms | `cubic-bezier(.22,1,.36,1)` |
 | Step line fill | scroll within the steps box, starts at 85vh | live | `linear` |
 | Active step | same progress | 350ms | `cubic-bezier(.22,1,.36,1)` |
 | Buttons | hover/active | 180ms | `cubic-bezier(.22,1,.36,1)` |
@@ -88,7 +117,7 @@ Everything is **`transform` and `opacity` only**. No animation library: CSS tran
 | Mobile menu | click | 250ms | `cubic-bezier(.22,1,.36,1)` |
 
 **`prefers-reduced-motion: reduce` must show the finished state, never less content:**
-selectors filled, parts lit, counter at 47, payoff capsule visible, every `data-reveal`
+the request sent, the merchants lit, the offers arrived, payoff capsule visible, every `data-reveal`
 element shown. Two belts: the hidden state is applied by JS (so a thrown error leaves the
 page visible rather than blank), and a CSS rule inside the media query forces
 `opacity:1; transform:none` back on.
@@ -99,8 +128,8 @@ is that **no content is gated behind an animation**, not that the page works scr
 crawlers that don't execute JS still get the right metadata. If organic search ever matters
 more than it does today, prerendering is the change to make — not more meta tags.
 
-**Under 760px:** floating chips removed, parts grid 6 instead of 12, selectors become one
-row. The compat scene **measures itself and applies `transform: scale()` (floor 0.7)** so it
+**Under 760px:** floating chips removed, two offer cards instead of three, selectors become one
+row. The offers scene **measures itself and applies `transform: scale()` (floor 0.7)** so it
 fits any viewport height instead of being clipped — desktop stays at `scale(1)`.
 
 ## Icons

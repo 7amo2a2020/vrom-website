@@ -157,18 +157,20 @@ export function Hero() {
         <div className="flex min-w-[300px] flex-1 basis-[480px] flex-col gap-6">
           <span className="flex items-center gap-2 self-start rounded-full border border-[#D3E5F6] bg-primary-light px-4 py-2 text-sm font-bold text-cover">
             <span className="size-2 rounded-full bg-primary" />
-            ماركتبليس قطع غيار للسوق المصري
+            قطع غيار السيارات — لكل محافظات مصر
           </span>
 
           <h1 className="text-[clamp(32px,5vw,58px)] leading-[1.22] font-extrabold text-balance">
-            قطعة غيار عربيتك…{' '}
+            القطعة تيجيلك{' '}
             <span className="bg-[linear-gradient(180deg,transparent_62%,#D6E9F9_62%)]">
-              من غير لفّ ولا مرتجعات
+              لحد باب بيتك
             </span>
           </h1>
 
-          <p className="max-w-[46ch] text-[clamp(17px,1.5vw,20px)] text-text-2 text-pretty">
-            حدّد عربيتك، ارفع طلبك، والتجار هيبعتولك عروضهم. إنت بس تقارن وتختار.
+          <p className="max-w-[48ch] text-[clamp(17px,1.5vw,20px)] text-text-2 text-pretty">
+            من نفس التاجر اللي بتشتري منه وواثق فيه — من غير ما تنزل المشوار.
+            ومش لاقيها عنده؟ ابعت طلبك ويجيلك عروض من تجار كتير، واختار بأقل سعر
+            أو أعلى تقييم.
           </p>
 
           <StoreBadges />

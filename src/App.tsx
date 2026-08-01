@@ -1,10 +1,10 @@
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { Compat } from './components/Compat'
+import { Offers } from './components/Offers'
 import {
   Categories,
+  DirectMerchant,
   Faq,
-  HowCustomer,
   HowMerchant,
   Problem,
   Trust,
@@ -13,8 +13,12 @@ import { Contact, Footer, Notify } from './components/Closing'
 import { useReveal } from './hooks/useMotion'
 
 /**
- * The order is the argument: pain → the fix → how it works for each side →
- * what makes it safe → the questions → the ask.
+ * The order is the argument.
+ *
+ * The pain is the trip, not the trust — people already have a merchant they buy
+ * from. So: the trip → order from that same merchant instead → and when he
+ * hasn't got it, the offers come to you → what that looks like from the shop's
+ * side → what makes it safe → the questions → the ask.
  */
 export default function App() {
   useReveal()
@@ -30,9 +34,9 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <Compat />
         <Problem />
-        <HowCustomer />
+        <DirectMerchant />
+        <Offers />
         <HowMerchant />
         <Categories />
         <Trust />
