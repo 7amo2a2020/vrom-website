@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Icon, IconHalo } from './Icons'
-import { buttonStyles, Ltr } from './ui'
+import { IconHalo } from './Icons'
+import { AppleMark, GooglePlayMark } from './StoreMarks'
 import { screens, trustStrip } from '../data/content'
 import { useReducedMotion } from '../hooks/useMotion'
 
 const STORES = [
-  { name: 'Google Play', icon: 'googlePlay' as const },
-  { name: 'App Store', icon: 'appStore' as const },
+  { name: 'Google Play', lead: 'احصل عليه من', Mark: GooglePlayMark },
+  { name: 'App Store', lead: 'نزّلها من', Mark: AppleMark },
 ]
 
 const TOOLTIP = 'التطبيق في المراحل الأخيرة — سيب إيميلك ونبلّغك أول ما ينزل.'
@@ -25,49 +25,34 @@ function StoreBadges({ tone = 'light' }: { tone?: 'light' | 'onBlue' }) {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex flex-wrap gap-3.5">
-        {STORES.map((s) => (
-          <div key={s.name} className="relative">
+      <div className="flex flex-wrap gap-3">
+        {STORES.map(({ name, lead, Mark }) => (
+          <div key={name} className="relative">
             <div
               role="button"
               aria-disabled="true"
               tabIndex={0}
-              aria-label={`${s.name} — قريبًا، التطبيق لسه ما نزلش`}
+              aria-label={`${name} — قريبًا، التطبيق لسه ما نزلش`}
               onMouseEnter={() => setTip(TOOLTIP)}
               onMouseLeave={() => setTip('')}
               onFocus={() => setTip(TOOLTIP)}
               onBlur={() => setTip('')}
-              className={`flex h-[60px] cursor-not-allowed items-center gap-3 rounded-xl px-5 ${
-                onBlue
-                  ? 'border border-white/30 bg-white/10'
-                  : 'border border-[#D7E5F3] bg-[#EEF4FA] opacity-70 grayscale'
+              className={`flex h-[58px] cursor-not-allowed items-center gap-3 rounded-[10px] bg-black px-4 text-white ${
+                onBlue ? 'border border-white/25' : 'border border-black/10'
               }`}
+              // Not the full-strength badge: it links nowhere yet, and reading
+              // as live would promise a download that does not exist.
+              style={{ opacity: 0.82 }}
             >
-              <Icon
-                name={s.icon}
-                size={24}
-                strokeWidth={1.5}
-                stroke={onBlue ? 'rgba(255,255,255,.72)' : 'var(--color-text-2)'}
-              />
-              <span className="flex flex-col items-start">
-                <span
-                  className="text-xs"
-                  style={{ color: onBlue ? 'rgba(255,255,255,.72)' : 'var(--color-text-2)' }}
-                >
-                  نزّل من
-                </span>
-                <span
-                  style={{ color: onBlue ? 'rgba(255,255,255,.86)' : 'var(--color-text-2)' }}
-                >
-                  <Ltr className="text-base font-bold">{s.name}</Ltr>
+              <Mark size={26} />
+              <span className="flex flex-col items-start leading-none">
+                <span className="text-[11px] text-white/85">{lead}</span>
+                <span dir="ltr" className="mt-1 text-[19px] leading-tight font-semibold">
+                  {name}
                 </span>
               </span>
             </div>
-            <span
-              className={`absolute -top-2.5 start-auto end-[-8px] rounded-full px-2.5 py-1 text-xs font-bold ${
-                onBlue ? 'bg-warn-bg text-[#8A5410]' : 'bg-warn text-white'
-              }`}
-            >
+            <span className="absolute -top-2.5 -end-2 rounded-full bg-warn px-2.5 py-1 text-xs font-bold text-white shadow-[0_2px_8px_rgba(196,122,30,.35)]">
               قريبًا
             </span>
           </div>
@@ -185,16 +170,6 @@ export function Hero() {
           <p className="max-w-[46ch] text-[clamp(17px,1.5vw,20px)] text-text-2 text-pretty">
             حدّد عربيتك، ارفع طلبك، والتجار هيبعتولك عروضهم. إنت بس تقارن وتختار.
           </p>
-
-          <div className="flex flex-wrap gap-3">
-            <a href="#how-customer" className={`${buttonStyles.primary} h-13 px-6 text-[17px]`}>
-              عايز قطعة
-              <Icon name="scrollDown" size={18} stroke="#fff" strokeWidth={1.8} />
-            </a>
-            <a href="#how-merchant" className={`${buttonStyles.secondary} h-13 px-6 text-[17px]`}>
-              عندي محل
-            </a>
-          </div>
 
           <StoreBadges />
         </div>
