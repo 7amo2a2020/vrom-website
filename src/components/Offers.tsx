@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { Icon } from './Icons'
 import { Eyebrow, Ltr } from './ui'
-import { offerSteps, sampleOffers } from '../data/content'
+import { sampleOffers } from '../data/content'
 import {
   NARROW,
   ramp,
@@ -33,7 +33,7 @@ export function Offers() {
   const narrow = useMediaQuery(NARROW)
 
   const scale = useFitScale(scene, () =>
-    typeof window === 'undefined' ? 0 : window.innerHeight - 112,
+    typeof window === 'undefined' ? 0 : window.innerHeight - 72,
   )
 
   const send = reduced ? 1 : ramp(progress, 0.06, 0.26) // the request leaves
@@ -55,13 +55,13 @@ export function Offers() {
         backgroundColor: 'var(--color-bg-alt)',
       }}
     >
-      <div className="sticky top-0 flex min-h-screen items-center px-5 py-14 sm:px-6">
+      <div className="sticky top-0 flex min-h-screen items-center px-5 py-10 sm:px-6">
         <div
           ref={scene}
-          className="mx-auto flex w-full max-w-[1216px] flex-col gap-8"
+          className="mx-auto flex w-full max-w-[1216px] flex-col gap-6"
           style={{ transform: `scale(${scale})`, transformOrigin: 'center center' }}
         >
-          <div className="flex flex-col items-center gap-3.5 text-center">
+          <div className="flex flex-col items-center gap-2.5 text-center">
             <Eyebrow tone="plain">مش لاقي القطعة؟</Eyebrow>
             <h2 className="max-w-[26ch] text-[clamp(26px,3.6vw,44px)] leading-[1.25] font-extrabold text-balance">
               بدل ما تلف إنت… العروض تيجيلك
@@ -74,7 +74,7 @@ export function Offers() {
 
           <div className="flex flex-wrap items-stretch gap-6">
             {/* ------------------------------------------- request → merchants */}
-            <div className="flex min-w-[280px] flex-1 basis-[320px] flex-col gap-5 rounded-3xl border border-[#D3E5F6] bg-white p-6 shadow-[0_18px_40px_-28px_rgba(31,94,163,.35)]">
+            <div className="flex min-w-[280px] flex-1 basis-[320px] flex-col gap-5 rounded-3xl border border-[#D3E5F6] bg-white p-5 shadow-[0_18px_40px_-28px_rgba(31,94,163,.35)]">
               <span className="text-[15px] font-bold">طلبك راح لمين</span>
 
               <div
@@ -144,7 +144,7 @@ export function Offers() {
             </div>
 
             {/* ----------------------------------------------- offers coming back */}
-            <div className="flex min-w-[300px] flex-[2] basis-[520px] flex-col gap-4 rounded-3xl border border-[#D3E5F6] bg-white p-6 shadow-[0_18px_40px_-28px_rgba(31,94,163,.35)]">
+            <div className="flex min-w-[300px] flex-[2] basis-[520px] flex-col gap-4 rounded-3xl border border-[#D3E5F6] bg-white p-5 shadow-[0_18px_40px_-28px_rgba(31,94,163,.35)]">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <span className="flex items-center gap-2 text-[15px] font-bold">
                   العروض اللي وصلتك
@@ -223,20 +223,6 @@ export function Offers() {
             </div>
           </div>
 
-          {/* The three steps, spelled out for anyone who skips the animation. */}
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
-            {offerSteps.map((s, i) => (
-              <div key={s.title} className="flex items-start gap-3">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-[15px] font-extrabold text-cover shadow-[0_1px_2px_rgba(13,27,46,.06)]">
-                  {['١', '٢', '٣'][i]}
-                </span>
-                <span className="flex flex-col gap-0.5">
-                  <span className="text-[16px] font-bold">{s.title}</span>
-                  <span className="hidden text-sm text-text-2 md:block">{s.body}</span>
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

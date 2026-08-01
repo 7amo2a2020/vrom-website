@@ -20,7 +20,7 @@ export function Problem() {
   return (
     <Section id="problem">
       <SectionHeading
-        eyebrow="الوجع"
+        eyebrow="المشكلة"
         eyebrowTone="danger"
         title="عايز قطعة… يعني هتنزل"
         lede="وإنت أصلًا عارف تاجرك وواثق فيه — المشكلة في المشوار مش في الثقة."

@@ -86,7 +86,7 @@ function PhoneMockup() {
 
   return (
     <div className="flex flex-col items-center gap-5">
-      <div className="relative w-[286px] rounded-[46px] bg-[linear-gradient(160deg,#16324F,#0D1B2E)] p-3 shadow-[0_40px_80px_-40px_rgba(13,27,46,.65)] sm:w-[328px]">
+      <div className="relative w-[268px] rounded-[46px] bg-[linear-gradient(160deg,#16324F,#0D1B2E)] p-3 shadow-[0_40px_80px_-40px_rgba(13,27,46,.65)] sm:w-[288px]">
         <div className="absolute start-1/2 top-[22px] z-10 h-5 w-[92px] -translate-x-1/2 rounded-full bg-[#0A1420]" />
         <div className="relative aspect-[640/1386] overflow-hidden rounded-[36px] bg-[#0D1B2E]">
           {screens.map((s, i) => (
@@ -143,7 +143,7 @@ function PhoneMockup() {
 
 export function Hero() {
   return (
-    <section id="top" className="blueprint relative overflow-hidden px-5 pt-16 pb-8 sm:px-6">
+    <section id="top" className="blueprint relative overflow-hidden px-5 pt-8 pb-8 sm:px-6 lg:pt-10">
       {/* Soft light behind the mockup — decorative, so it never intercepts a tap. */}
       <div
         aria-hidden="true"
@@ -153,7 +153,7 @@ export function Hero() {
             'radial-gradient(circle at center, #E1EEFA 0%, rgba(244,248,253,0) 70%)',
         }}
       />
-      <div className="relative mx-auto flex max-w-[1216px] flex-wrap items-center gap-14">
+      <div className="relative mx-auto flex max-w-[1216px] flex-wrap items-start gap-10 lg:gap-14">
         <div className="flex min-w-[300px] flex-1 basis-[480px] flex-col gap-6">
           <span className="flex items-center gap-2 self-start rounded-full border border-[#D3E5F6] bg-primary-light px-4 py-2 text-sm font-bold text-cover">
             <span className="size-2 rounded-full bg-primary" />
@@ -169,8 +169,8 @@ export function Hero() {
 
           <p className="max-w-[48ch] text-[clamp(17px,1.5vw,20px)] text-text-2 text-pretty">
             من نفس التاجر اللي بتشتري منه وواثق فيه — من غير ما تنزل المشوار.
-            ومش لاقيها عنده؟ ابعت طلبك ويجيلك عروض من تجار كتير، واختار بأقل سعر
-            أو أعلى تقييم.
+            أو مش لاقيها عنده؟ ابعت طلبك ويجيلك عروض من تجار كتير، واختار بأقل
+            سعر أو أعلى تقييم.
           </p>
 
           <StoreBadges />
