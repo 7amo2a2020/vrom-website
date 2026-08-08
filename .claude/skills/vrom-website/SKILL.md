@@ -153,5 +153,5 @@ in `src/components/Icons.tsx`.
 ## Stack
 
 React 19 + Vite + TypeScript + Tailwind v4 (CSS-first `@theme`), oxlint — mirroring
-`admin/`. Static build, deployed to Cloudflare Pages. Dev server on **5174** (admin holds
-5173). No backend except the contact form and the email capture.
+the admin panel (its own repo, `vrom-admin`). Static build, deployed to Cloudflare Pages.
+Dev server on **5174** (the admin panel holds 5173). No backend except the contact form and the email capture.
